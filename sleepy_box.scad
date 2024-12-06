@@ -89,12 +89,10 @@ difference()
 		}
 	}
 	// tolle box
-	/*
-	translate([0, box_length/2-wall_thickness-1, 30])
+	translate([0, box_length/2-wall_thickness+2, 30])
 	rotate([90, 0, 180])
-	linear_extrude(height = wall_thickness+2)
+	linear_extrude(height = 5)
 	text(text = "tolle box");
-	*/
 }
 
 module roundedcube(size = [ 1, 1, 1 ], center = false, radius = 0.5, apply_to = "all")
