@@ -22,13 +22,10 @@ usb_height = 10;
 usb_port_1 = 30;
 usb_port_next = 20;
 
-breathing_height = 10;
-breathing_width = box_length_nw - 2*20;
-breathing_whole_offset = 30;
-breathing_whole_distance = 30;
-airvent_close_width = 10;
-airvent_sections = 4;
-airvent_open_width = (breathing_width - ((airvent_sections - 1)*airvent_close_width)) / airvent_sections ;
+air_vent_hole_radius = 5;
+air_vent_hole_distance = 30;
+air_vent_side_distance = 30;
+air_vent_top_distance = 30;
 
 difference() {
     // main body
@@ -63,22 +60,26 @@ difference() {
             linear_extrude(height = usb_height, v = [0, 0, 1])
             square([usb_width, wall_thickness*2]);    
     }
+
+    for (i = [0:5]) {
+        for (j = [0:2]) {
+            translate([box_width/2-15, -box_width_nw/2+i*air_vent_hole_distance+10, 25 -j*air_vent_hole_distance])
+            rotate([0, 60, -30])
+            linear_extrude(height = wall_thickness+30)
+            circle(r=air_vent_hole_radius);
+            translate([-box_width/2-15, -box_width_nw/2+0+i*air_vent_hole_distance-10, 45 -j*air_vent_hole_distance])
+            rotate([0, 120, 30])
+            linear_extrude(height = wall_thickness+30)
+            circle(r=air_vent_hole_radius);
+        }
+    }
+    //tolle box
+    translate([0, box_length/2-wall_thickness-1, 30])
+    rotate([90, 0, 180])
+    linear_extrude(height = wall_thickness+2)
+    text(text = "tolle box");
     
-    // breathing holes
-for (i = [0 : 2]) {
-    rotate([0, 0, 90])
-        translate([0, -box_width_nw/2-2.5, -box_height_nw/2+breathing_whole_offset+i*breathing_whole_distance])
-            linear_extrude(height = breathing_height, v = [0, 0, 1])
-            square([breathing_width, wall_thickness*2], center = true);
-            }
 }
 
-// tolle box
-rotate([90, 0, 180])
-translate([0, 0, box_length/2+0])
-text(text = "tolle box");
 
-for (i = [-1 : 1]) {
-translate([box_width/2 - wall_thickness, breathing_width/4*i, -box_height/2])
-cube([wall_thickness, wall_thickness, box_height]);
-}
+
