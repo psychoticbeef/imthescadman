@@ -27,6 +27,10 @@ air_vent_hole_distance = 30;
 air_vent_side_distance = 30;
 air_vent_top_distance = 30;
 
+magnet_height = 2.1;
+surface_above_magnet = 1;
+magnet_diameter = 3.1;
+
 difference()
 {
 	// main body
@@ -89,10 +93,13 @@ difference()
 		}
 	}
 	// tolle box
-	translate([0, box_length/2-wall_thickness+2, 30])
-	rotate([90, 0, 180])
-	linear_extrude(height = 5)
-	text(text = "tolle box");
+	translate([ 0, box_length / 2 - wall_thickness + 2, 30 ])
+	rotate([ 90, 0, 180 ])
+	linear_extrude(height = 5) text(text = "tolle box");
+
+	// hole for magnet
+	translate([ 0, -box_length / 2 + 0.5 * wall_thickness, box_height / 2 - magnet_height - surface_above_magnet ])
+	linear_extrude(height = 2) circle(d = magnet_diameter);
 }
 
 module roundedcube(size = [ 1, 1, 1 ], center = false, radius = 0.5, apply_to = "all")

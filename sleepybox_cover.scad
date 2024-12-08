@@ -17,6 +17,10 @@ box_length_nw = 210;
 box_width_nw = 155 - 2 * wall_thickness;
 box_height_nw = 115;
 
+magnet_height = 2.1;
+surface_above_magnet = 1;
+magnet_diameter = 3.1;
+
 difference()
 {
 	union()
@@ -26,8 +30,8 @@ difference()
 		// grooves
 		difference()
 		{
-			translate([ wall_thickness, wall_thickness, wall_thickness - 4 ])
-			roundedcube([ box_width_nw, box_length_nw, wall_thickness + 1 ]);
+			translate([ wall_thickness, wall_thickness, wall_thickness - 1 ])
+			color([ 0.5, 0.5, 0, 0.5 ]) roundedcube([ box_width_nw, box_length_nw, wall_thickness + 1 ]);
 			translate(
 			    [ wall_thickness * 2 + cover_tolerance / 2, wall_thickness * 2 + cover_tolerance / 2, wall_thickness ])
 			cube([
@@ -64,6 +68,11 @@ difference()
 			linear_extrude(height = wall_thickness + 50) circle(r = air_vent_hole_radius);
 		}
 	}
+
+	// hole for magnet
+	translate(
+	    [ box_width / 2, box_length - 0.5 * wall_thickness, wall_thickness - magnet_height - surface_above_magnet ])
+	linear_extrude(height = 2) circle(d = magnet_diameter);
 }
 
 module roundedcube(size = [ 1, 1, 1 ], center = false, radius = 0.5, apply_to = "all")
