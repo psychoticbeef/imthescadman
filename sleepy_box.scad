@@ -74,6 +74,13 @@ difference()
 		])
 		linear_extrude(height = usb_height, v = [ 0, 0, 1 ]) square([ usb_width, wall_thickness * 2 ]);
 	}
+	// and one on the right
+	translate([
+		box_width_nw / 2 / 2 - usb_height * 2, box_length / 2 - wall_thickness - 1,
+		-box_height / 2 + wall_thickness + usb_port_1 - usb_height / 2 + 0 *
+		usb_port_next
+	])
+	linear_extrude(height = usb_height, v = [ 0, 0, 1 ]) square([ usb_width, wall_thickness * 2 ]);
 
 	for (i = [0:5])
 	{
@@ -93,13 +100,13 @@ difference()
 		}
 	}
 	// tolle box
-	translate([ 0, box_length / 2 - wall_thickness + 2, 30 ])
-	rotate([ 90, 0, 180 ])
-	linear_extrude(height = 5) text(text = "tolle box");
+	// translate([ 0, box_length / 2 - wall_thickness + 2, 30 ])
+	// rotate([ 90, 0, 180 ])
+	// linear_extrude(height = 5) text(text = "tolle box");
 
 	// hole for magnet
-	translate([ 0, -box_length / 2 + 0.5 * wall_thickness, box_height / 2 - magnet_height - surface_above_magnet ])
-	linear_extrude(height = 2) circle(d = magnet_diameter);
+	// translate([ 0, -box_length / 2 + 0.5 * wall_thickness, box_height / 2 - magnet_height - surface_above_magnet ])
+	// linear_extrude(height = 2) circle(d = magnet_diameter);
 }
 
 module roundedcube(size = [ 1, 1, 1 ], center = false, radius = 0.5, apply_to = "all")

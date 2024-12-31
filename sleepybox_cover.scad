@@ -70,9 +70,11 @@ difference()
 	}
 
 	// hole for magnet
+    /*
 	translate(
 	    [ box_width / 2, box_length - 0.5 * wall_thickness, wall_thickness - magnet_height - surface_above_magnet ])
 	linear_extrude(height = 2) circle(d = magnet_diameter);
+    */
 }
 
 module roundedcube(size = [ 1, 1, 1 ], center = false, radius = 0.5, apply_to = "all")
